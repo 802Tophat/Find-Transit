@@ -104,7 +104,7 @@ def vehicle_type(route_id):
     return vehicle
 
 
-def next_transit():
+def main():
     args = get_args()
     route_id = routes(args.start)
     direction_id = direction(args.direction, route_id)
@@ -112,10 +112,10 @@ def next_transit():
     departure_time, minutes_remaining = times(route_id, direction_id, place_code)
     vehicle = vehicle_type(route_id)
     # Inform the user of the status of their next depature.
-    print(f"\nThe next {vehicle} at {args.start} going {args.direction} towards {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
+    print(f"\nThe next {vehicle} at {args.start} going {args.direction.capitalize()} towards {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
 
 
 
 
 if __name__ == "__main__":
-    next_transit()
+    main()
