@@ -91,8 +91,8 @@ def times(route_id, direction_id, place_code):
 
 def vehicle_type(route_id):
     # Determine the type of vechile
-    get_transit = requests.get(url="https://svc.metrotransit.org/nextripv2/vehicles/" + route_id)
-    transit = get_transit.json()
+    get_transit_type = requests.get(url="https://svc.metrotransit.org/nextripv2/vehicles/" + route_id)
+    transit = get_transit_type.json()
     for i in transit:
         if 'RAIL' in i['trip_id']:
             vehicle = 'train'
@@ -112,7 +112,7 @@ def main():
     departure_time, minutes_remaining = times(route_id, direction_id, place_code)
     vehicle = vehicle_type(route_id)
     # Inform the user of the status of their next depature.
-    print(f"\nThe next {vehicle} at {args.start} going {args.direction.capitalize()} towards {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
+    print(f"\nThe next {vehicle} on {args.start} going {args.direction.capitalize()} from {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
 
 
 
