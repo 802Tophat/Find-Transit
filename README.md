@@ -37,4 +37,4 @@ In this example we are looking for the next train on available on the "Metro Blu
 
     findtransit.py "METRO Blue Line" "Target Field Station Platform 2" south
 
-    The next train on METRO Blue Line going South from Target Field Station Platform 2 is leaving in 0 minutes at 14:59.
+    The next train on METRO Blue Line going South from Target Field Station Platform 2 is leaving in 8 minutes at 15:35.
