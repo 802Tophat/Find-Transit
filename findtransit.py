@@ -5,12 +5,14 @@ import pytz
 import argparse
 
 
-# Define arguments used to get route information
-parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='Example:  findtransit.py "METRO Blue Line" "Target Field Station Platform 1" South')
-parser.add_argument('start', type=str, help="Route name or number of the transit line you are joining.")
-parser.add_argument('stop', type=str, help="Transit Station where you will get off.")
-parser.add_argument('direction', type=str, help="Direction you plan to go - North, South, East, West")
-args = parser.parse_args()
+def get_args():
+    # Define arguments used to get route information
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='Example:  findtransit.py "METRO Blue Line" "Target Field Station Platform 1" South')
+    parser.add_argument('start', type=str, help="Route name or number of the transit line you are joining.")
+    parser.add_argument('stop', type=str, help="Transit Station where you will get off.")
+    parser.add_argument('direction', type=str, help="Direction you plan to go - North, South, East, West")
+    args = parser.parse_args()
+    return args
 
 
 # Identify the bus route names and IDs
@@ -102,7 +104,8 @@ def vehicle_type(route_id):
     return vehicle
 
 
-def main():
+def next_transit():
+    args = get_args()
     route_id = routes(args.start)
     direction_id = direction(args.direction, route_id)
     place_code = places(args.stop, route_id, direction_id)
@@ -111,5 +114,8 @@ def main():
     # Inform the user of the status of their next depature.
     print(f"\nThe next {vehicle} at {args.start} going {args.direction} towards {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
 
+
+
+
 if __name__ == "__main__":
-    main()
+    next_transit()
