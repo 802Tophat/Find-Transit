@@ -2,11 +2,11 @@
 ## Description
 This program will assist in finding the next transit vehicle leaving a defined  station on a defined route in a defined direction.
 ## Notes
-You will need to know the following information in order to use this application successfully.For assistance in identifying any of these required fields visit https://www.metrotransit.org/schedules-maps. 
+You will need to know the following information in order to use this application successfully. For assistance in identifying any of these required fields visit https://www.metrotransit.org/schedules-maps. 
 
 1. Route name.
-2. The transit station you want to start your journey from. Must be on the provided route name.
-3. The primary cardinal direction you plan to travel (North, South, East, West).  Must be a direction that the route travels.
+2. The transit station you want to start your journey from. The station selected, must be on the selected route.
+3. The primary cardinal direction you plan to travel (North, South, East, West).  The direction selected must be a direction traveled on the selected route.
 
 Example:
 
@@ -19,21 +19,21 @@ Example:
     pip install -r requirements.txt
 
 ## Usage 
-    usage: findtransit.py [-h] start stop direction
+    usage: findtransit.py [-h] route start direction
 
     Example:  findtransit.py "METRO Blue Line" "Target Field Station Platform 1" South
 
     positional arguments:
-    start       Route name or number of the transit line you are joining.
-    stop        Transit Station where you will get off.
-    direction   Direction you plan to go - North, South, East, West
+        route       Route name of the transit line you are joining.
+        start       Transit Station where you will get off.
+        direction   Direction you plan to go - North, South, East, West
 
     optional arguments:
     -h, --help  show this help message and exit
 
 
 ## Example
-In this example we are looking for the next train on available on the "Metro Blue Line" leaving from "Target Field Station 2" and going South.
+In this example we are looking for the next train available on the "Metro Blue Line" leaving from "Target Field Station 2" and going South.
 
     findtransit.py "METRO Blue Line" "Target Field Station Platform 2" south
 

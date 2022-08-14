@@ -8,19 +8,19 @@ import argparse
 def get_args():
     # Define arguments used to get route information
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='Example:  findtransit.py "METRO Blue Line" "Target Field Station Platform 1" South')
-    parser.add_argument('start', type=str, help="Route name or number of the transit line you are joining.")
-    parser.add_argument('stop', type=str, help="Transit Station where you will get off.")
+    parser.add_argument('route', type=str, help="Route name of the transit line you are joining.")
+    parser.add_argument('start', type=str, help="Transit Station where you will get off.")
     parser.add_argument('direction', type=str, help="Direction you plan to go - North, South, East, West")
     args = parser.parse_args()
     return args
 
 
 # Identify the bus route names and IDs
-def routes(start_arg):
+def routes(route_arg):
     get_routes = requests.get(url="https://svc.metrotransit.org/nextripv2/routes")
     routes = get_routes.json()
     for i in routes:
-        if i['route_label'] == start_arg:
+        if i['route_label'] == route_arg:
             route_id = (i['route_id'])
             break
     else:
@@ -106,13 +106,13 @@ def vehicle_type(route_id):
 
 def main():
     args = get_args()
-    route_id = routes(args.start)
+    route_id = routes(args.route)
     direction_id = direction(args.direction, route_id)
-    place_code = places(args.stop, route_id, direction_id)
+    place_code = places(args.start, route_id, direction_id)
     departure_time, minutes_remaining = times(route_id, direction_id, place_code)
     vehicle = vehicle_type(route_id)
     # Inform the user of the status of their next depature.
-    print(f"\nThe next {vehicle} on {args.start} going {args.direction.capitalize()} from {args.stop} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
+    print(f"\nThe next {vehicle} on {args.route} going {args.direction.capitalize()} from {args.start} is leaving in {minutes_remaining} minutes at {departure_time:%H:%M}.\n")
 
 
 
