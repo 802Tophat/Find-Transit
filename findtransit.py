@@ -20,12 +20,12 @@ def routes(route_arg):
     get_routes = requests.get(url="https://svc.metrotransit.org/nextripv2/routes")
     routes = get_routes.json()
     for i in routes:
-        if i['route_label'] == route_arg:
+        if i['route_label'].lower() == route_arg.lower():
             route_id = (i['route_id'])
             break
     else:
         print('''
-    Please provide a valid beginning route name (case sensitive).
+    Please provide a valid beginning route name.
     Use quotations, if your route has more than one word.
     For example: "METRO Blue Line" or "Route 723".
     ''')
@@ -56,12 +56,12 @@ def places(place, route_id, direction_id):
     get_stops = requests.get(url="https://svc.metrotransit.org/nextripv2/stops/" + route_id + "/" + direction_id)
     stops = get_stops.json()
     for i in stops:
-        if i['description'] == place:
+        if i['description'].lower() == place.lower():
             place_code = (i['place_code'])
             break
     else:
         print('''
-    Please provide a valid Transit Station destination (case sensitive).
+    Please provide a valid Transit Station destination.
     Use quotations, if your route has more than one word.
     For example: "Target Field Station Platform 2" or "MSP Airport Terminal 2 - Humphrey Station"
     ''')

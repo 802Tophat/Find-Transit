@@ -38,7 +38,7 @@ Example:
 
 
 ## Example
-In this example we are looking for the next train available on the "Metro Blue Line" leaving from "Target Field Station 2" and going South.
+In this example we are looking for the next train available on the "METRO Blue Line" leaving from "Target Field Station 2" and going South.
 
     findtransit.py "METRO Blue Line" "Target Field Station Platform 2" south
 
